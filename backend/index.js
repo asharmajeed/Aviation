@@ -16,8 +16,8 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: "https://aviation-eight.vercel.app",
-    methods: "GET, POST",
+    origin: ["https://aviation-eight.vercel.app"],
+    methods: ["GET, POST"],
     credentials: true,
   }));
 
