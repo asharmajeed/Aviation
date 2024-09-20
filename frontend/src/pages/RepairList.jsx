@@ -88,7 +88,6 @@ const RepairList = () => {
       const response = await fetch(
         `https://aviationbackend.vercel.app/api/repairs/${componentType}`,
         {
-          method: "GET",
           credentials: "include",
         }
       );
