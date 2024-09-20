@@ -39,6 +39,7 @@ const RepairList = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(repairData),
         }
       );
@@ -85,7 +86,11 @@ const RepairList = () => {
   const fetchRepairs = async (componentType) => {
     try {
       const response = await fetch(
-        `https://aviationbackend.vercel.app/api/repairs/${componentType}`
+        `https://aviationbackend.vercel.app/api/repairs/${componentType}`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
