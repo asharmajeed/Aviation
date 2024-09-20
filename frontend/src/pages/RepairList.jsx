@@ -32,13 +32,16 @@ const RepairList = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/repairs", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(repairData),
-      });
+      const response = await fetch(
+        "https://aviationbackend.vercel.app/api/repairs",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(repairData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -82,7 +85,7 @@ const RepairList = () => {
   const fetchRepairs = async (componentType) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/repairs/${componentType}`
+        `https://aviationbackend.vercel.app/api/repairs/${componentType}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
