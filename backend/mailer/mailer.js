@@ -32,7 +32,7 @@ const sendExpiryMailToAdmin = (repair) => {
 };
 
 // Schedule a cron job to run every day at midnight
-cron.schedule('0 0 * * *', async () => {
+cron.schedule('* * * * *', async () => {
   console.log('Checking for expired repairs...');
 
   const currentDate = moment().format('YYYY-MM-DD');
