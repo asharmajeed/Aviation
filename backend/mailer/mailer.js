@@ -35,7 +35,7 @@ const sendExpiryMailToAdmin = (repair) => {
 cron.schedule('* * * * *', async () => {
   console.log('Checking for expired repairs...');
 
-  const currentDate = moment().format('YYYY-MM-DD');
+  const currentDate = moment().format('MMMM DD, YYYY');
 
   try {
     // Fetch repairs with an expireDate equal to the current date
