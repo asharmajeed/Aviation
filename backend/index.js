@@ -4,6 +4,7 @@ import cors from "cors";
 
 import connectDB from "./config/db.js";
 import repairRoutes from "./routes/repairRoutes.js";
+import cronRoutes from "./routes/cronRoutes.js";
 import { startCronJob } from "./mailer/mailer.js";
 
 dotenv.config();
@@ -26,5 +27,6 @@ app.use(cors());
 
 // Routes
 app.use("/api/repairs", repairRoutes);
+app.use("/api/runjob", cronRoutes)
 
 app.listen(port, () => console.log(`Server running on port: ${port}`));
