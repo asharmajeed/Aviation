@@ -4,12 +4,14 @@ import cors from "cors";
 
 import connectDB from "./config/db.js";
 import repairRoutes from "./routes/repairRoutes.js";
+import { startCronJob } from "./mailer/mailer.js";
 
 dotenv.config();
 const port = process.env.PORT || 5000;
 
 // Connect to MongoDB
 connectDB();
+startCronJob();
 
 const app = express();
 

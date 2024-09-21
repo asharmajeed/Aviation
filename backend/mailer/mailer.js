@@ -1,11 +1,14 @@
-import nodemailer from 'nodemailer';
-import cron from 'node-cron';
-import moment from 'moment';
-import Repair from '../models/repair.js'
+import nodemailer from "nodemailer";
+import cron from "node-cron";
+import moment from "moment";
+import Repair from "../models/repair.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Set up nodemailer transporter
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.ADMIN_EMAIL,
     pass: process.env.ADMIN_EMAIL_PASSWORD,
@@ -24,28 +27,31 @@ const sendExpiryMailToAdmin = (repair) => {
   // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log('Error sending email:', error);
+      console.log("Error sending email:", error);
     } else {
-      console.log('Email sent: ' + info.response);
+      console.log("Email sent: " + info.response);
     }
   });
 };
 
 // Schedule a cron job to run every day at midnight
-cron.schedule('* * * * *', async () => {
-  console.log('Checking for expired repairs...');
+export const startCronJob = () => {
+  cron.schedule("* * * * *", async () => {
+    console.log("Checking for expired repairs...");
 
-  const currentDate = moment().format('MMMM DD, YYYY');
+    const currentDate = moment().format("YYYY-MM-DD");
 
-  try {
-    // Fetch repairs with an expireDate equal to the current date
-    const expiredRepairs = await Repair.find({ expireDate: currentDate });
+    try {
+      // Fetch repairs with an expireDate equal to the current date
+      const expiredRepairs = await Repair.find({ expireDate: currentDate });
+      console.log('Expired Repairs:', expiredRepairs);
 
-    // Send an email for each expired repair
-    expiredRepairs.forEach((repair) => {
-      sendExpiryMailToAdmin(repair);
-    });
-  } catch (error) {
-    console.log('Error checking expired repairs:', error);
-  }
-});
+      // Send an email for each expired repair
+      expiredRepairs.forEach((repair) => {
+        sendExpiryMailToAdmin(repair);
+      });
+    } catch (error) {
+      console.log("Error checking expired repairs:", error);
+    }
+  });
+};
