@@ -1,9 +1,14 @@
 import express from "express";
 // import Repair from "../models/repair.js";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
+dotenv.config(); // Load environment variables
 
 const router = express.Router();
 
 router.post("/", async (req, res) => {
+  console.log('running');
   const transporter = nodemailer.createTransport({
     service: "gmail", // or 'gmail', depending on your service
     auth: {
@@ -17,7 +22,7 @@ router.post("/", async (req, res) => {
     const isExpired = true; // Example condition for expired repairs
 
     if (isExpired) {
-      await transporter.sendMail({
+      transporter.sendMail({
         from: process.env.ADMIN_EMAIL,
         to: process.env.ADMIN_EMAIL, // Admin email
         subject: "Repair Expired",
