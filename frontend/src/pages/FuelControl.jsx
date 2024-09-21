@@ -3,7 +3,7 @@ import fuelControlImg from "../assets/fuel-control.jpg"
 import QRCodeComponent from "../components/QRCodeComponent";
 
 const FuelControl = () => {
-  const repairListUrl = 'http://localhost:5173/repair-list';
+  const repairListUrl = 'https://aviation-eight.vercel.app/repair-list';
   
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
