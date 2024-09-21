@@ -21,7 +21,7 @@ const sendExpiryMailToAdmin = (repair) => {
     from: process.env.ADMIN_EMAIL,
     to: process.env.ADMIN_EMAIL, // Always send to admin
     subject: `Repair Expired for ${repair.componentType}`,
-    text: `The repair for component "${repair.componentType}" by "${repair.username}" has expired on ${repair.expireDate}. Please take the necessary action.`,
+    text: `The repair for component "${repair.componentType}" by "${repair.username}" has expired on ${moment(repair.expireDate).format("ddd MMM DD YYYY")}. Please take the necessary action.`,
   };
 
   // Send the email
