@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     const isExpired = true; // Example condition for expired repairs
 
     if (isExpired) {
-      transporter.sendMail({
+      await transporter.sendMail({
         from: process.env.ADMIN_EMAIL,
         to: process.env.ADMIN_EMAIL, // Admin email
         subject: "Repair Expired",
