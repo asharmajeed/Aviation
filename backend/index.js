@@ -13,14 +13,14 @@ connectDB();
 
 const app = express();
 
-const corsOptions = {
-  origin: "https://aviation-eight.vercel.app", // Replace with your frontend origin
-  credentials: true, // Allow credentials (cookies, auth)
-};
+// const corsOptions = {
+//   origin: "https://aviation-eight.vercel.app", // Replace with your frontend origin
+//   credentials: true, // Allow credentials (cookies, auth)
+// };
 
 // Middleware
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Routes
 app.use("/api/repairs", repairRoutes);
