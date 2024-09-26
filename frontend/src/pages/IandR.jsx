@@ -4,11 +4,12 @@ import IRImg from '../assets/IR.png'
 const IandR = () => {
   return (
     <div className="container mx-auto p-6">
+      <h1 className="text-4xl font-bold mb-4">Installation and Repair</h1>
       {/* Single Image Section */}
       <img
         src={IRImg} // Replace with actual image path
         alt="Aircraft Components"
-        className="w-full h-auto rounded-lg mb-6"
+        className="w-[50%] h-auto mx-auto rounded-lg mb-6"
       />
 
       {/* Fuel Control Section */}

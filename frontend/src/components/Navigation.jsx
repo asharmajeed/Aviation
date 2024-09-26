@@ -7,6 +7,7 @@ import { GiPressureCooker } from "react-icons/gi";
 import { SiFueler } from "react-icons/si";
 import { RiHistoryFill } from "react-icons/ri";
 import { FaRegFilePdf } from "react-icons/fa6";
+import { LuBadgeInfo } from "react-icons/lu";
 
 const Navigation = () => {
   return (
@@ -56,7 +57,7 @@ const Navigation = () => {
               </li>
               <li className="py-3">
                 <Link to="/installation-and-repair" className="text-white text-3xl">
-                  <SiFueler />
+                  <LuBadgeInfo />
                 </Link>
               </li>
               <li className="py-3">
