@@ -6,6 +6,7 @@ import { BsFuelPump } from "react-icons/bs";
 import { GiPressureCooker } from "react-icons/gi";
 import { SiFueler } from "react-icons/si";
 import { RiHistoryFill } from "react-icons/ri";
+import { FaRegFilePdf } from "react-icons/fa6";
 
 const Navigation = () => {
   return (
@@ -56,6 +57,11 @@ const Navigation = () => {
               <li className="py-3 absolute bottom-0">
                 <Link to="/repair-list" className="text-white text-3xl">
                   <RiHistoryFill />
+                </Link>
+              </li>
+              <li className="py-3 absolute bottom-0">
+                <Link to="/MAINTENANCE_MANUAL_JT_12.pdf" className="text-white text-3xl">
+                  <FaRegFilePdf />
                 </Link>
               </li>
             </ul>
