@@ -9,7 +9,7 @@ import cronRoutes from "./routes/cronRoutes.js";
 dotenv.config();
 const port = process.env.PORT || 5000;
 
-// Connect to MongoDB
+// Connecting to MongoDB
 connectDB();
 
 const app = express();
