@@ -54,14 +54,14 @@ const Navigation = () => {
                   <SiFueler />
                 </Link>
               </li>
+              <li className="py-3">
+                <a href="/MAINTENANCE_MANUAL_JT_12.pdf" className="text-white text-3xl">
+                  <FaRegFilePdf />
+                </a>
+              </li>
               <li className="py-3 absolute bottom-0">
                 <Link to="/repair-list" className="text-white text-3xl">
                   <RiHistoryFill />
-                </Link>
-              </li>
-              <li className="py-3 absolute bottom-0">
-                <Link to="/MAINTENANCE_MANUAL_JT_12.pdf" className="text-white text-3xl">
-                  <FaRegFilePdf />
                 </Link>
               </li>
             </ul>
