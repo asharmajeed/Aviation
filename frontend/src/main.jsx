@@ -14,6 +14,7 @@ import FuelPump from './pages/FuelPump.jsx';
 import HydraulicPump from './pages/HydraulicPump.jsx';
 import FuelControl from './pages/FuelControl.jsx';
 import RepairList from './pages/RepairList.jsx';
+import IandR from './pages/IandR.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="/hydraulic-pump" element={<HydraulicPump />} />
       <Route path="/fuel-control" element={<FuelControl />} />
       <Route path="/repair-list" element={<RepairList />} />
+      <Route path="/installation-and-repair" element={<IandR />} />
     </Route>
   )
 );

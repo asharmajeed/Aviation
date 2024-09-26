@@ -123,7 +123,7 @@ const RepairList = () => {
   return (
     <div className="p-6">
       {/* Fuel Pump Section */}
-      <h2 className="text-2xl font-bold mb-2">Fuel Pump</h2>
+      <h2 className="text-2xl font-bold mb-2">Fuel Pump | Operating hours: 100 h</h2>
       <ul className="mb-4">
         {fuelPumpList.map((item, index) => (
           <li key={index} className="mb-2 text-lg">
@@ -143,7 +143,7 @@ const RepairList = () => {
       </button>
 
       {/* Hydraulic Pump Section */}
-      <h2 className="text-2xl font-bold mb-2">Hydraulic Pump</h2>
+      <h2 className="text-2xl font-bold mb-2">Hydraulic Pump | Operating hours: 100 h</h2>
       <ul className="mb-4">
         {hydraulicPumpList.map((item, index) => (
           <li key={index} className="mb-2 text-lg">
@@ -163,7 +163,7 @@ const RepairList = () => {
       </button>
 
       {/* Fuel Control Section */}
-      <h2 className="text-2xl font-bold mb-2">Fuel Control</h2>
+      <h2 className="text-2xl font-bold mb-2">Fuel Control | Operating hours: 100 h</h2>
       <ul className="mb-4">
         {fuelControlList.map((item, index) => (
           <li key={index} className="mb-2 text-lg">
@@ -183,7 +183,7 @@ const RepairList = () => {
       </button>
 
       {/* Motor Section */}
-      <h2 className="text-2xl font-bold mb-2">Motor</h2>
+      <h2 className="text-2xl font-bold mb-2">Motor | Operating hours: 100 h</h2>
       <ul className="mb-4">
         {motorList.map((item, index) => (
           <li key={index} className="mb-2 text-lg">

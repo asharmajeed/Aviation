@@ -55,7 +55,12 @@ const Navigation = () => {
                 </Link>
               </li>
               <li className="py-3">
-                <a href="/MAINTENANCE_MANUAL_JT_12.pdf" className="text-white text-3xl">
+                <Link to="/installation-and-repair" className="text-white text-3xl">
+                  <SiFueler />
+                </Link>
+              </li>
+              <li className="py-3">
+                <a href="/MAINTENANCE_MANUAL_JT_12.pdf" target="_blank" className="text-white text-3xl">
                   <FaRegFilePdf />
                 </a>
               </li>
