@@ -18,16 +18,24 @@ router.post("/", async (req, res) => {
     },
   });
 
-  const sendExpiryMailToAdmin = (repair) => {
+  const sendExpiryMailToAdmin = (repair, isReminder = false) => {
     const mailOptions = {
       from: process.env.ADMIN_EMAIL,
       to: process.env.ADMIN_EMAIL, // Always send to admin
-      subject: `Repair Expired for ${repair.componentType}`,
-      text: `The repair for component "${repair.componentType}" by "${
-        repair.username
-      }" has expired on ${moment(repair.expireDate).format(
-        "ddd MMM DD YYYY"
-      )}. Please take the necessary action.`,
+      subject: isReminder
+        ? `Reminder: Repair Expiring Soon for ${repair.componentType}`
+        : `Repair Expired for ${repair.componentType}`,
+      text: isReminder
+        ? `The repair for component "${repair.componentType}" by "${
+            repair.username
+          }" will expire on ${moment(repair.expireDate).format(
+            "ddd MMM DD YYYY"
+          )}. Please take action soon.`
+        : `The repair for component "${repair.componentType}" by "${
+            repair.username
+          }" has expired on ${moment(repair.expireDate).format(
+            "ddd MMM DD YYYY"
+          )}. Please take the necessary action.`,
     };
 
     // Send the email
@@ -35,22 +43,41 @@ router.post("/", async (req, res) => {
       if (error) {
         console.log("Error sending email:", error);
       } else {
-        console.log("Email sent: " + info.response);
+        console.log(
+          isReminder
+            ? `Reminder Email sent: ${info.response}`
+            : `Expired Email sent: ${info.response}`
+        );
       }
     });
   };
 
   try {
-    console.log("Checking for expired repairs...");
+    console.log("Checking for expired and expiring repairs...");
 
     const currentDate = moment().format("YYYY-MM-DD");
+    const oneDayBefore = moment().subtract(1, "days").format("YYYY-MM-DD"); // Subtract 1 day from the current date
 
+    // Fetch repairs that have expired today
     const expiredRepairs = await Repair.find({ expireDate: currentDate });
     console.log("Expired Repairs:", expiredRepairs);
+
+    // Fetch repairs that expired 1 day before
+    const expiringRepairs = await Repair.find({ expireDate: oneDayBefore });
+    console.log("Expiring Repairs:", expiringRepairs);
 
     // Send an email for each expired repair
     expiredRepairs.forEach((repair) => {
       sendExpiryMailToAdmin(repair);
+    });
+
+    // Send a reminder email for repairs that will expire soon
+    expiringRepairs.forEach((repair) => {
+      sendExpiryMailToAdmin(repair, true); // 'true' indicates it's a reminder
+    });
+
+    res.status(200).json({
+      message: "Emails sent for expired and expiring repairs",
     });
   } catch (error) {
     console.error("Error sending email:", error);

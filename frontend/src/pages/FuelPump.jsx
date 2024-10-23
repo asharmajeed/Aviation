@@ -1,10 +1,10 @@
 import React from "react";
-import fuelPumpImg from "../assets/fuel-pump.jpg"
+import fuelPumpImg from "../assets/fuel-pump.jpg";
 import QRCodeComponent from "../components/QRCodeComponent";
 
 const FuelPump = () => {
-  const repairListUrl = 'https://aviation-eight.vercel.app/repair-list';
-  
+  const repairListUrl = "https://aviation-eight.vercel.app/fuel-pump-monitoring";
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h1 className="text-4xl font-bold mb-4 text-center">Fuel Pump</h1>
@@ -14,37 +14,84 @@ const FuelPump = () => {
         className="w-full h-64 object-cover rounded-lg mb-6"
       />
       <div className="text-lg text-gray-700 leading-relaxed">
+        <h1 className="text-3xl font-bold mb-4 text-black">Removal</h1>
+        <h1 className="text-2xl font-bold mb-4 text-black">Caution</h1>
         <p className="mb-4">
-          The fuel pump is a critical component in an aircraft's fuel system,
-          responsible for moving fuel from the storage tanks to the engine. In
-          most aircraft, the fuel pump operates under pressure, ensuring that
-          the fuel reaches the engine at the correct flow rate and pressure
-          level. Without this precise operation, the engine could starve of
-          fuel, leading to a loss of power or even engine failure during flight.
-          In smaller aircraft, a simple mechanical fuel pump might suffice,
-          while larger, more complex aircraft may use electric pumps or a
-          combination of both for redundancy.
+          Do not allow the fuel pump to hang by the drive shaft during removal
+          as damage to the shaft splines may result. Support the pump whenever
+          it is not secured to the gearbox with the locknuts.
         </p>
-        <p className="mb-4">
-          Aircraft fuel pumps can be classified into two major types:
-          engine-driven and electric pumps. The engine-driven pump is typically
-          the primary pump, providing fuel during normal operations. Electric
-          pumps often serve as backup pumps, ensuring fuel flow in case the
-          primary pump fails or during situations like starting the engine when
-          the engine-driven pump isn't operational. These systems are designed
-          with multiple fail-safes, ensuring that a loss of one pump doesn’t
-          compromise flight safety.
-        </p>
-        <p>
-          Fuel pumps also play a role in fuel balancing. In aircraft with
-          multiple fuel tanks, the fuel must be distributed evenly to maintain
-          proper balance and center of gravity. A malfunctioning fuel pump can
-          disrupt this balance, leading to uneven weight distribution, which may
-          affect the aircraft's handling and stability. As such, fuel pumps are
-          not just about moving fuel but are integral to maintaining the overall
-          performance and safety of the aircraft.
-        </p>
+        <ol
+          className="mb-4"
+          style={{ listStyle: "lower-alpha", listStylePosition: "inside" }}
+        >
+          <li>Remove the fuel de-icing heater.</li>
+          <li>Remove the fuel control from the fuel pump.</li>
+          <li>
+            Disconnect the fluid pressure differential switch lead at the
+            switch.
+          </li>
+          <li>Remove the fuel supply line from the fuel pump inlet pad.</li>
+          <li>
+            Remove the locknuts securing the fuel pump to the gearbox and remove
+            the pump.
+          </li>
+          <li>Remove the fluid pressure differential switch from the pump.</li>
+        </ol>
       </div>
+      <div className="text-lg text-gray-700 leading-relaxed">
+        <h1 className="text-3xl font-bold mb-4 text-black">Installation</h1>
+        <ol
+          className="mb-4"
+          style={{ listStyle: "lower-alpha", listStylePosition: "inside" }}
+        >
+          <li>
+            Place two new seals on fluid pressure differen-tial switch and
+            install switch on fuel pump with electrical connector facing
+            rearward.
+          </li>
+          <li>
+            Secure switch to pump with washers and bolts. Tighten bolts to
+            recommended torque and lockwire.
+          </li>
+          <li>
+            Apply a coating of extreme pressure lubricating grease, Plastilube
+            Moly No. 3 or equivalent, to pump drive spline.
+          </li>
+          <h1 className="text-2xl font-bold my-4 text-black">Note</h1>
+          <p className="mb-4">
+            Excessive amounts of lubricant are not necessary. Apply an even coat
+            on spline surface with a small, clean paste brush.
+          </p>
+          <h1 className="text-2xl font-bold my-4 text-black">Caution</h1>
+          <p className="mb-4">
+            Do not apply lubricant to fuel pump drive splines of P/N 524383
+            (Ceco parts list 9489),P/N 524386 (Ceco parts list 0488), and P/N
+            500349 (Ceco parts list 9490) fuel pump. Splines of these controls
+            are lubricated internally by circulation of engine oil which may be
+            retarded by application of grease.
+          </p>
+          <li>
+            Place new packing in ring groove in periphery of fuel pump
+            driveshaft and install pump on mounting pad of gearbox and secure
+            with washers and locknuts. Tighten locknuts to recommended torque.
+          </li>
+          <h1 className="text-2xl font-bold my-4 text-black">Caution</h1>
+          <p className="mb-4">
+            Holley P/N 19A31029A fuel control burner pressure fitting shall not
+            be removed to facilitate tightening fuel pump-to-fuel control
+            attaching locknuts,
+          </p>
+          <li>Install fuel control on mounting pad of fuel pump.</li>
+          <li>
+            Connect fluid pressure differential switch lead to switch. Tighten
+            to recommended torque and lockwire.
+          </li>
+          <li>Install fuel supply line to fuel pump inlet pad.</li>
+          <li>Install fuel de-icing heater.</li>
+        </ol>
+      </div>
+      <h1 className="text-3xl font-bold mb-4 text-black">IPC : 9489-A4</h1>
       <QRCodeComponent url={repairListUrl} />
     </div>
   );

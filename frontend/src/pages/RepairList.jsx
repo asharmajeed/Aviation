@@ -33,7 +33,7 @@ const RepairList = () => {
 
     try {
       const response = await fetch(
-        "https://aviationbackend.vercel.app/api/repairs",
+        "http://localhost:5000/api/repairs",
         {
           method: "POST",
           headers: {
@@ -85,7 +85,7 @@ const RepairList = () => {
   const fetchRepairs = async (componentType) => {
     try {
       const response = await fetch(
-        `https://aviationbackend.vercel.app/api/repairs/${componentType}`
+        `http://localhost:5000/api/repairs/${componentType}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
