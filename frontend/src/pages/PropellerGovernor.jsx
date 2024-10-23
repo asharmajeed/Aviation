@@ -3,7 +3,7 @@ import motorImg from "../assets/motor.jpg";
 import QRCodeComponent from "../components/QRCodeComponent";
 
 const PropellerGovernor = () => {
-  const repairListUrl = "http://localhost:5173/propeller-governor-monitoring";
+  const repairListUrl = "https://aviation-eight.vercel.app/propeller-governor-monitoring";
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
