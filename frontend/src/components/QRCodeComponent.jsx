@@ -8,7 +8,8 @@ const QRCodeComponent = ({ url }) => {
         Scan the QR Code below or{" "}
         <Link to={url} className="text-blue-500 underline">
           click here
-        </Link>
+        </Link>{" "}
+        to go to maintainance monitoring
       </div>
       <div className="my-4 w-fit mx-auto">
         <QRCodeSVG value={url} size={256} />
