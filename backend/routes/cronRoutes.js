@@ -14,12 +14,21 @@ router.post("/", async (req, res) => {
     ADMIN_EMAIL: process.env.ADMIN_EMAIL,
     ADMIN_EMAIL_PASSWORD: process.env.ADMIN_EMAIL_PASSWORD ? "Set" : "Not Set",
   });
+
   const transporter = nodemailer.createTransport({
     service: "gmail", // or 'gmail', depending on your service
     auth: {
       user: process.env.ADMIN_EMAIL, // Replace with your email
       pass: process.env.ADMIN_EMAIL_PASSWORD, // Replace with your email password
     },
+  });
+
+  transporter.verify((error, success) => {
+    if (error) {
+      console.error("Transporter verification failed:", error);
+    } else {
+      console.log("Transporter is ready to send messages.");
+    }
   });
 
   const sendExpiryMailToAdmin = async (repair, isReminder = false) => {
@@ -52,7 +61,6 @@ router.post("/", async (req, res) => {
       console.error("Error sending email:", error);
     }
   };
-  
 
   try {
     console.log("Checking for expired and expiring repairs...");
