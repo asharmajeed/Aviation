@@ -18,10 +18,10 @@ router.post("/", async (req, res) => {
     },
   });
 
-  const sendExpiryMailToAdmin = (repair, isReminder = false) => {
+  const sendExpiryMailToAdmin = async (repair, isReminder = false) => {
     const mailOptions = {
       from: process.env.ADMIN_EMAIL,
-      to: process.env.ADMIN_EMAIL, // Always send to admin
+      to: process.env.ADMIN_EMAIL,
       subject: isReminder
         ? `Reminder: Repair Expiring Soon for ${repair.componentType}`
         : `Repair Expired for ${repair.componentType}`,
@@ -37,20 +37,18 @@ router.post("/", async (req, res) => {
             "ddd MMM DD YYYY"
           )}. Please take the necessary action.`,
     };
-
-    // Send the email
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log("Error sending email:", error);
-      } else {
-        console.log(
-          isReminder
-            ? `Reminder Email sent: ${info.response}`
-            : `Expired Email sent: ${info.response}`
-        );
-      }
-    });
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      console.log(
+        isReminder
+          ? `Reminder Email sent: ${info.response}`
+          : `Expired Email sent: ${info.response}`
+      );
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
   };
+  
 
   try {
     console.log("Checking for expired and expiring repairs...");
