@@ -23,13 +23,14 @@ router.post("/", async (req, res) => {
     },
   });
 
-  transporter.verify((error, success) => {
-    if (error) {
-      console.error("Transporter verification failed:", error);
-    } else {
-      console.log("Transporter is ready to send messages.");
-    }
-  });
+  try {
+    // Verify transporter before proceeding
+    await transporter.verify();
+    console.log("Transporter is ready to send messages.");
+  } catch (error) {
+    console.error("Transporter verification failed:", error);
+    return res.status(500).json({ error: "Failed to initialize email transporter" });
+  }
 
   const sendExpiryMailToAdmin = async (repair, isReminder = false) => {
     const mailOptions = {
@@ -50,6 +51,7 @@ router.post("/", async (req, res) => {
             "ddd MMM DD YYYY"
           )}. Please take the necessary action.`,
     };
+
     try {
       const info = await transporter.sendMail(mailOptions);
       console.log(
@@ -57,8 +59,10 @@ router.post("/", async (req, res) => {
           ? `Reminder Email sent: ${info.response}`
           : `Expired Email sent: ${info.response}`
       );
+      return true; // Email sent successfully
     } catch (error) {
       console.error("Error sending email:", error);
+      return false; // Email sending failed
     }
   };
 
@@ -77,21 +81,28 @@ router.post("/", async (req, res) => {
     console.log("Expiring Repairs:", expiringRepairs);
 
     // Send an email for each expired repair
-    expiredRepairs.forEach((repair) => {
-      sendExpiryMailToAdmin(repair);
-    });
+    const expiredEmailResults = await Promise.all(
+      expiredRepairs.map((repair) => sendExpiryMailToAdmin(repair))
+    );
 
     // Send a reminder email for repairs that will expire soon
-    expiringRepairs.forEach((repair) => {
-      sendExpiryMailToAdmin(repair, true); // 'true' indicates it's a reminder
-    });
+    const expiringEmailResults = await Promise.all(
+      expiringRepairs.map((repair) => sendExpiryMailToAdmin(repair, true))
+    );
 
-    res.status(200).json({
-      message: "Emails sent for expired and expiring repairs",
-    });
+    // Check if all emails were sent
+    const allEmailsSent =
+      expiredEmailResults.every((result) => result) &&
+      expiringEmailResults.every((result) => result);
+
+    if (allEmailsSent) {
+      res.status(200).json({ message: "All emails sent successfully" });
+    } else {
+      res.status(500).json({ message: "Some emails failed to send" });
+    }
   } catch (error) {
-    console.error("Error sending email:", error);
-    res.status(500).json({ error: "Failed to send email" });
+    console.error("Error during email operation:", error);
+    res.status(500).json({ error: "Failed to process email sending" });
   }
 });
 
