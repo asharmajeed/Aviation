@@ -8,6 +8,12 @@ dotenv.config(); // Load environment variables
 
 const router = express.Router();
 
+console.log("Environment Variables:", {
+  ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+  ADMIN_EMAIL_PASSWORD: process.env.ADMIN_EMAIL_PASSWORD ? "Set" : "Not Set",
+});
+
+
 router.post("/", async (req, res) => {
   console.log("running");
   const transporter = nodemailer.createTransport({
